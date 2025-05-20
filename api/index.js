@@ -3,7 +3,10 @@ import Stripe from 'stripe'
 import { env } from './env.js';
 
 const app = express()
-const stripe = new Stripe(env.STRIPE_PRIVATE_API_KEY)
+const stripe = new Stripe(env.STRIPE_PRIVATE_API_KEY, {
+  apiVersion: '2025-03-31.basil'
+})
+
 
 app.use(express.json())
 app.use((req, res, next) => {
@@ -22,13 +25,12 @@ app.post('/create-checkout-session', async (req, res) => {
       ui_mode: 'custom',
       line_items: [
         {
-          // Provide the exact Price ID (e.g. price_1234) of the product you want to sell
-          price: '{{PRICE_ID}}',
+          price: "price_1RQnhZRqfXHOaZkLvcTYOfoz",
           quantity: 1,
         },
       ],
       mode: 'payment',
-      return_url: `${env.API_URL}/return.html?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${env.APP_URL}/return.html?session_id={CHECKOUT_SESSION_ID}`,
     })
 
     res.send({ clientSecret: session.client_secret })
