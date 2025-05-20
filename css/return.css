@@ -1,0 +1,48 @@
+section#success {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  max-width: 600px; 
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--text-color);
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+section#success p {
+  margin-bottom: 20px;
+}
+
+section#success a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+section#success a:hover {
+  color: var(--primary-color); 
+}
+
+
+#customer-email {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+
+@media (max-width: 600px) {
+  section#success {
+    padding: 25px;
+    margin: 15px; 
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 400px) {
+  section#success {
+    padding: 20px;
+  }
+}

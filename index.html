@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Accept a payment</title>
+  <script src="https://js.stripe.com/basil/stripe.js"></script>
+  <script src="checkout.js" defer></script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/checkout.css">
+</head>
+
+<body>
+  <form id="payment-form">
+    <input type="text" id="email" placeholder="you@example.com" />
+    <div type="text" id="email-errors"></div>
+    <h4>Payment</h4>
+    <div id="payment-element">
+      <!--Stripe.js injects the Payment Element-->
+    </div>
+    <button id="submit">
+      <div class="spinner hidden" id="spinner"></div>
+      <span id="button-text">Pay now</span>
+    </button>
+    <div id="payment-message" class="hidden"></div>
+  </form>
+</body>
+
+</html>
