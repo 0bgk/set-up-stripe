@@ -37,12 +37,12 @@ app.post('/create-checkout-session', async (req, res) => {
       line_items: [
         {
           // Provide the exact Price ID (e.g. price_1234) of the product you want to sell
-      price: "price_1RQnhZRqfXHOaZkLvcTYOfoz",
+        price: "price_1RQnhZRqfXHOaZkLvcTYOfoz",
         quantity: 1,
         },
       ],
       mode: 'payment',
-      return_url: `${env.API_URL}/return.html?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${env.APP_URL}/return.html?session_id={CHECKOUT_SESSION_ID}`,
     })
 
     res.send({ clientSecret: session.client_secret })
