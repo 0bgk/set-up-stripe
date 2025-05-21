@@ -3,10 +3,7 @@ import Stripe from 'stripe'
 import { env } from './env.js';
 
 const app = express()
-const stripe = new Stripe(env.STRIPE_PRIVATE_API_KEY, {
-  apiVersion: '2025-03-31.basil'
-})
-
+const stripe = new Stripe(env.STRIPE_PRIVATE_API_KEY)
 
 app.use(express.json())
 app.use((req, res, next) => {
@@ -19,18 +16,33 @@ app.use((req, res, next) => {
   next()
 })
 
+app.post('/create-payment-intent', async (_req, res) => {
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 1099,
+      currency: 'eur',
+      automatic_payment_methods: { enabled: true },
+    })
+
+    res.send({ clientSecret: paymentIntent.client_secret })
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+})
+
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
       ui_mode: 'custom',
       line_items: [
         {
-          price: "price_1RQnhZRqfXHOaZkLvcTYOfoz",
-          quantity: 1,
+          // Provide the exact Price ID (e.g. price_1234) of the product you want to sell
+      price: "price_1RQnhZRqfXHOaZkLvcTYOfoz",
+        quantity: 1,
         },
       ],
       mode: 'payment',
-      return_url: `${env.APP_URL}/return.html?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${env.API_URL}/return.html?session_id={CHECKOUT_SESSION_ID}`,
     })
 
     res.send({ clientSecret: session.client_secret })
