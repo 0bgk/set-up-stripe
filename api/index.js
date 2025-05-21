@@ -3,7 +3,9 @@ import Stripe from 'stripe'
 import { env } from './env.js';
 
 const app = express()
-const stripe = new Stripe(env.STRIPE_PRIVATE_API_KEY)
+const stripe = new Stripe(env.STRIPE_PRIVATE_API_KEY, {
+  apiVersion: '2025-04-30.basil',
+}) 
 
 app.use(express.json())
 app.use((req, res, next) => {
