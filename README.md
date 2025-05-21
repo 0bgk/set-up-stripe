@@ -1,4 +1,4 @@
-# Stripe Checkout Project
+# Stripe Checkout
 
 This project includes a basic API and frontend to handle payments using Stripe.
 
